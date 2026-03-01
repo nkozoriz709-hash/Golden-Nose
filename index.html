@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAZZRELAX - Диффузоры</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Анимированный фон -->
+    <div class="background-animation">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+        <div class="bubble bubble-4"></div>
+        <div class="bubble bubble-5"></div>
+        <div class="bubble bubble-6"></div>
+        <div class="aroma-particle particle-1">🌸</div>
+        <div class="aroma-particle particle-2">🌿</div>
+        <div class="aroma-particle particle-3">🍃</div>
+        <div class="aroma-particle particle-4">✨</div>
+        <div class="aroma-particle particle-5">💫</div>
+    </div>
+
+    <!-- Header -->
+    <header id="main-header">
+        <div class="container header-container">
+            <a href="#" class="logo">Golden<span>Nose</span></a>
+            <div class="user-actions" id="user-actions">
+                <a href="#account" id="account-link">Личный кабинет</a>
+                <a href="#" class="btn-auth" id="login-btn">Войти</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Auth Modals -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="login-close">&times;</button>
+            <h2 class="modal-title">Вход в аккаунт</h2>
+            <form class="modal-form" id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-accent" style="width: 100%; padding: 15px;">Войти</button>
+            </form>
+            <div class="modal-switch">
+                Нет аккаунта? <a href="#" id="switch-to-register">Зарегистрироваться</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="register-close">&times;</button>
+            <h2 class="modal-title">Регистрация</h2>
+            <form class="modal-form" id="register-form">
+                <div class="form-group">
+                    <label for="register-name">Имя</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-phone">Телефон</label>
+                    <input type="tel" id="register-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Пароль</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm">Подтвердите пароль</label>
+                    <input type="password" id="register-confirm" required>
+                </div>
+                <button type="submit" class="btn btn-accent" style="width: 100%; padding: 15px;">Зарегистрироваться</button>
+            </form>
+            <div class="modal-switch">
+                Уже есть аккаунт? <a href="#" id="switch-to-login">Войти</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal Account Section (Hidden by default) -->
+    <section class="personal-account" id="account" style="display: none;">
+        <div class="container">
+            <div class="account-header">
+                <h1>Личный кабинет</h1>
+                <p class="account-welcome" id="account-welcome">Добро пожаловать!</p>
+            </div>
+            
+            <div class="account-content">
+                <div class="account-sidebar">
+                    <nav class="account-nav">
+                        <ul>
+                            <li><a href="#profile" class="active" data-section="profile">Профиль</a></li>
+                            <li><a href="#orders" data-section="orders">Мои заказы</a></li>
+                            <li><a href="#addresses" data-section="addresses">Адреса доставки</a></li>
+                            <li><a href="#" id="logout-btn">Выйти</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                <div class="account-main">
+                    <!-- Profile Section -->
+                    <div class="account-section active" id="profile-section">
+                        <h2>Профиль</h2>
+                        <form class="profile-form" id="profile-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="profile-name">Имя</label>
+                                    <input type="text" id="profile-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-email">Email</label>
+                                    <input type="email" id="profile-email" required readonly>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="profile-phone">Телефон</label>
+                                    <input type="tel" id="profile-phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-birthdate">Дата рождения</label>
+                                    <input type="date" id="profile-birthdate">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-accent">Сохранить изменения</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Orders Section -->
+                    <div class="account-section" id="orders-section">
+                        <h2>Мои заказы</h2>
+                        <div class="orders-list" id="orders-list">
+                            <!-- Orders will be loaded here -->
+                            <div class="no-orders">
+                                <p>У вас пока нет заказов</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Addresses Section -->
+                    <div class="account-section" id="addresses-section">
+                        <h2>Адреса доставки</h2>
+                        <div class="addresses-list" id="addresses-list">
+                            <!-- Addresses will be loaded here -->
+                        </div>
+                        <button class="btn btn-accent" id="add-address-btn">Добавить адрес</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Panel (Hidden by default) -->
+    <section class="admin-panel" id="admin-panel" style="display: none;">
+        <div class="container">
+            <div class="admin-header">
+                <h1>Панель администратора</h1>
+                <p class="admin-welcome">Управление магазином Golden Nose</p>
+            </div>
+            
+            <div class="admin-content">
+                <!-- Статистика -->
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-info">
+                            <h3>Всего заказов</h3>
+                            <p id="total-orders">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <h3>Выручка</h3>
+                            <p id="total-revenue">0 ₽</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🆕</div>
+                        <div class="stat-info">
+                            <h3>Новых заказов</h3>
+                            <p id="new-orders">0</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Управление заказами -->
+                <div class="admin-section">
+                    <h2>Управление заказами</h2>
+                    <div class="admin-orders" id="admin-orders-list">
+                        <!-- Orders will be loaded here -->
+                        <div class="no-orders">Загрузка заказов...</div>
+                    </div>
+                </div>
+                
+                <!-- Управление ароматами -->
+                <div class="admin-section">
+                    <h2>Управление ароматами</h2>
+                    <div class="admin-aromas" id="admin-aromas-list">
+                        <!-- Aromas will be loaded here -->
+                        <div class="no-orders">Загрузка ароматов...</div>
+                    </div>
+                </div>
+                
+                <!-- Управление изображениями -->
+                <div class="admin-section">
+                    <h2>Управление изображениями</h2>
+                    <div class="admin-images" id="admin-images-list">
+                        <!-- Images will be loaded here -->
+                        <div class="no-orders">Загрузка изображений...</div>
+                    </div>
+                    <button class="btn btn-accent" onclick="addImage()" style="margin-top: 20px;">+ Добавить изображение</button>
+                </div>
+                
+                <!-- Кнопки действий -->
+                <div class="admin-actions">
+                    <button class="btn btn-accent" onclick="showMainPage()">Вернуться на сайт</button>
+                    <button class="btn" onclick="logout()">Выйти</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+            <h1>Удобный заказ диффузоров</h1>
+            <p>Эксклюзивные аромадиффузоры для создания идеальной атмосферы в вашем доме. Премиум качество, долговечность и изысканные ароматы.</p>
+            <a href="#order" class="btn btn-accent">Перейти к заказу</a>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="order">
+        <div class="container">
+            <div class="product-detail">
+                <!-- Галерея изображений -->
+                <div class="product-gallery">
+                    <div class="main-image-container">
+                        <img src="https://i.ibb.co/4gDjzH4m/CD92-BE09-B000-45-D0-B65-E-43-B09-E73-B43-C-1-201-a.jpg" 
+                             alt="Аромадиффузор NAZZRELAX - премиум качество" 
+                             id="main-product-image"
+                             class="main-image">
+                        <div class="image-overlay">
+                            <button class="zoom-btn" id="zoom-btn">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="thumbnails">
+                        <div class="thumbnail active" data-image="https://i.ibb.co/4gDjzH4m/CD92-BE09-B000-45-D0-B65-E-43-B09-E73-B43-C-1-201-a.jpg">
+                            <img src="https://i.ibb.co/4gDjzH4m/CD92-BE09-B000-45-D0-B65-E-43-B09-E73-B43-C-1-201-a.jpg" alt="Диффузор вид 1">
+                        </div>
+                        <div class="thumbnail" data-image="https://i.ibb.co/xqtRwH0W/8074027-A-D404-4517-BFC0-AD53-F0-B21-A7-A-1-201-a.jpg">
+                            <img src="https://i.ibb.co/xqtRwH0W/8074027-A-D404-4517-BFC0-AD53-F0-B21-A7-A-1-201-a.jpg" alt="Диффузор вид 2">
+                        </div>
+                        <div class="thumbnail" data-image="https://i.ibb.co/vCHCG9Vy/C30168-BE-1-F73-4156-BD7-B-7-BC677-E06-BD5-1-201-a.jpg">
+                            <img src="https://i.ibb.co/vCHCG9Vy/C30168-BE-1-F73-4156-BD7-B-7-BC677-E06-BD5-1-201-a.jpg" alt="Диффузор вид 3">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-info">
+                    <h2 class="product-title">Премиум аромадиффузор</h2>
+                    <p class="product-description">
+                        Наш аромадиффузор создан для тех, кто ценит качество и эстетику. 
+                        Благодаря уникальной технологии распыления, аромат равномерно распределяется 
+                        по всему помещению, создавая уютную и расслабляющую атмосферу.
+                    </p>
+                    <p>2 ДИФФУЗОРА = 420 ₽</p>
+                    
+                    <div class="product-price">420 ₽</div>
+                    
+                    <!-- Блок выбора аромата -->
+                    <div class="product-aromas" id="product-aromas">
+                        <h3>Выберите аромат:</h3>
+                        <div class="aromas-grid" id="aromas-container">
+                            <!-- Ароматы будут добавлены через JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="product-features">
+                        <h3>Особенности:</h3>
+                        <ul class="features-list">                         
+                            <li>Экономный расход</li>
+                            <li>Стильный дизайн под любой интерьер</li>
+                            <li>Безопасность для детей и животных</li>
+                            <li>Натуральные ароматические масла</li>
+                        </ul>
+                    </div>
+                    
+                    <form class="order-form" id="order-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Имя *</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Телефон *</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Адрес доставки *</label>
+                            <input type="text" id="address" placeholder="Город, улица, дом, квартира" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="comment">Комментарий к заказу</label>
+                            <textarea id="comment" placeholder="Ваши пожелания..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-accent" style="width: 100%; padding: 18px; font-size: 16px;">
+                            <i class="fas fa-shopping-cart"></i> Оформить заказ
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно для увеличенного изображения -->
+    <div class="modal image-modal" id="image-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="image-modal-close">&times;</button>
+            <div class="modal-image-container">
+                <img src="" alt="" id="modal-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>О Golden Nose</h2>
+                    <p>Golden Nose специализируется на создании эксклюзивных аромадиффузоров для дома и офиса. Мы верим, что правильная атмосфера способна преобразить любое пространство.</p>
+                    <p>Наши диффузоры производятся из качественных материалов с использованием натуральных ароматических масел. Каждый продукт проходит строгий контроль качества перед отправкой клиенту.</p>
+                    <p>Мы заботимся не только о качестве наших продуктов, но и о комфорте наших клиентов. Простая система заказа, быстрая доставка и профессиональная поддержка - вот что делает Golden Nose особенным.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://i.ibb.co/MkM5SLMK/2-2-8.png" alt="Аромадиффузоры Golden Nose">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Relaxation Effect Section -->
+    <section class="relaxation-section">
+        <div class="container">
+            <div class="relaxation-content">
+                <h2>Почувствуйте гармонию</h2>
+                <p>Каждый аромат создан для того, чтобы превратить ваше пространство в оазис спокойствия и уюта.</p>
+                <div class="relaxation-grid">
+                    <div class="relaxation-item">
+                        <div class="relaxation-icon">🌙</div>
+                        <h3>Спокойный сон</h3>
+                        <p>Расслабляющие ароматы для глубокого и качественного отдыха</p>
+                    </div>
+                    <div class="relaxation-item">
+                        <div class="relaxation-icon">🧘</div>
+                        <h3>Медитация</h3>
+                        <p>Создайте идеальную атмосферу для практик осознанности</p>
+                    </div>
+                    <div class="relaxation-item">
+                        <div class="relaxation-icon">🏡</div>
+                        <h3>Домашний уют</h3>
+                        <p>Превратите свой дом в место силы и комфорта</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Golden Nose</h3>
+                    <p>Эксклюзивные аромадиффузоры для создания идеальной атмосферы.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Информация</h3>
+                    <ul>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#order">Заказать</a></li>
+                        <li><a href="#account" id="footer-account-link">Личный кабинет</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li>
+                            <a href="https://t.me/order101" target="_blank" style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fab fa-telegram" style="font-size: 18px; color: var(--accent);"></i>
+                                @order101
+                            </a>
+                        </li>
+                        <li>image.stock1001@gmail.com</li>
+                        <li>Ежедневно 9:00-21:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Golden Nose. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
